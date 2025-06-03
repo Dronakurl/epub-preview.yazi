@@ -20,7 +20,10 @@ function M:preload(job)
 		return 1
 	end
 
-	local size = math.min(PREVIEW.max_width, PREVIEW.max_height)
+	local size = nil
+	if PREVIEW.max_width ~= nil and PREVIEW.max_height ~= nil then
+		size = math.min(PREVIEW.max_width, PREVIEW.max_height)
+	end
 
 	-- First try to use `epub-thumbnailer` command
 	local child, code = Command("epub-thumbnailer"):args({
